@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Sitemap: https://getduodo.com/sitemap.xml
+
+# Block specific directories if needed
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/

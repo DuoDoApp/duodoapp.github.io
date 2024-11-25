@@ -42,31 +42,39 @@
             line-height: 1.5;
             cursor: grab;
             user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0);
+            padding: 10px;
+            border-radius: 5px;
         }
 
         .todo-item:active {
             cursor: grabbing;
         }
 
+        .todo-content {
+            width: 100%;
+            min-height: 30px;
+            outline: none;
+        }
+
         .control-buttons {
-            position: absolute;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            top: 0;
-            left: 100%;
-            transform: translate(-50%, 0);
+            justify-content: center;
+            width: 100%;
         }
 
         .control-buttons button {
-            width: 50px;
-            height: 30px;
+            padding: 5px 15px;
             font-size: 16px;
             border: none;
             background-color: #007bff;
             color: white;
             cursor: pointer;
+            border-radius: 3px;
         }
 
         .control-buttons button:hover {
@@ -104,7 +112,6 @@
     <div class="add-button" id="addButton">+</div>
 
     <script>
-        // 背景图片数组
         const backgroundImages = [
             'https://image-qiniu.jellow.site/FpPhN_2m6QNdxlQIV06H63KWqS_0.jpg',
             'https://image-qiniu.jellow.site/FmypTaEWDPvnysQBIR_gvDRO06wv.jpg',
@@ -112,7 +119,6 @@
             'https://image-qiniu.jellow.site/Fi_-T3XF2YVgMJfwWNIArUtGKeRH.jpg'
         ];
 
-        // 随机选择背景图片
         window.onload = function() {
             const randomIndex = Math.floor(Math.random() * backgroundImages.length);
             document.getElementById('todoApp').style.backgroundImage = `url('${backgroundImages[randomIndex]}')`;
@@ -131,24 +137,35 @@
 
             const todoItem = document.createElement('div');
             todoItem.className = 'todo-item';
-            todoItem.contentEditable = 'true';
-            todoItem.textContent = `待办事项 ${todoCount}`;
 
-            todoItem.style.top = `${containerHeight / 2}px`;
-            todoItem.style.left = `${containerWidth / 2}px`;
+            // 创建内容div
+            const todoContent = document.createElement('div');
+            todoContent.className = 'todo-content';
+            todoContent.contentEditable = 'true';
+            todoContent.textContent = `待办事项 ${todoCount}`;
 
+            // 创建控制按钮容器
             const controlButtons = document.createElement('div');
             controlButtons.className = 'control-buttons';
 
             const confirmButton = createControlButton('✔ 确认', (e) => {
                 e.preventDefault();
                 controlButtons.remove();
-                todoItem.contentEditable = false;
+                todoContent.contentEditable = false;
                 todoItem.style.cursor = 'default';
             });
 
             controlButtons.append(confirmButton);
+            
+            // 将内容和按钮添加到todoItem
+            todoItem.appendChild(todoContent);
             todoItem.appendChild(controlButtons);
+
+            // 设置位置
+            todoItem.style.top = `${containerHeight / 2}px`;
+            todoItem.style.left = `${containerWidth / 2}px`;
+            todoItem.style.transform = 'translate(-50%, -50%)';
+
             enableDrag(todoItem);
             todoContainer.appendChild(todoItem);
         });
@@ -166,6 +183,7 @@
             let initialLeft, initialTop;
 
             const startDrag = (e) => {
+                if (e.target.tagName === 'BUTTON') return; // 如果点击的是按钮，不启动拖拽
                 isDragging = true;
                 const touch = e.type === "touchstart" ? e.touches[0] : e;
                 startX = touch.clientX;

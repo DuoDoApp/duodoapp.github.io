@@ -18,7 +18,7 @@ body {
     height: 100vh;
     overflow: hidden;
     transform: scale(0.8); /* 缩小整体大小到 80% */
-    padding-top: 5px; /* 设置顶部额外的内边距 */
+    padding-top: 10px; /* 设置顶部额外的内边距 */
     box-sizing: border-box;
 }
 
@@ -26,8 +26,8 @@ body {
             position: relative;
             width: 402px; /* 缩小比例，适配 804px 宽背景 */
             height: 813px; /* 缩小比例，适配 1626px 高背景 */
-            background-image: url('https://image-qiniu.jellow.site/FtQNOCbOsg537aG7PfNvXMvgexJO.jpg');
-            background-size: cover;
+            background-image: url('https://image-qiniu.jellow.site/FojisuFeHGTRY7CfGfkclsNODTnb.jpg');
+            background-size: : : : cover;;;;
             background-position: center;
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -113,32 +113,35 @@ body {
 
         // 添加待办事项
         addButton.addEventListener('click', () => {
-            todoCount++;
-            const todoItem = document.createElement('div');
-            todoItem.className = 'todo-item';
-            todoItem.contentEditable = 'true'; // 可编辑
-            todoItem.textContent = `待办事项 ${todoCount}`; // 默认文字
-            todoItem.style.top = '50%'; // 默认位置：逐渐向下排列
-            todoItem.style.left = '10%'; // 默认居左
+    todoCount++;
+    const todoItem = document.createElement('div');
+    todoItem.className = 'todo-item';
+    todoItem.contentEditable = 'true'; // 可编辑
+    todoItem.textContent = `待办事项 ${todoCount}`; // 默认文字
 
-            // 创建控制按钮容器
-            const controlButtons = document.createElement('div');
-            controlButtons.className = 'control-buttons';
+    // 设置新任务位置为正中间
+    todoItem.style.top = '50%'; // 距顶部 50%
+    todoItem.style.left = '50%'; // 距左侧 50%
+    todoItem.style.transform = 'translate(-50%, -50%)'; // 通过 transform 实现真正的居中
 
-            // 创建上下左右按钮
-            const upButton = createControlButton('↑', () => moveItem(todoItem, 0, -10));
-            const downButton = createControlButton('↓', () => moveItem(todoItem, 0, 10));
-            const leftButton = createControlButton('←', () => moveItem(todoItem, -10, 0));
-            const rightButton = createControlButton('→', () => moveItem(todoItem, 10, 0));
-            const confirmButton = createControlButton('✔', () => controlButtons.remove()); // 确认按钮，移除控制按钮
+    // 创建控制按钮容器
+    const controlButtons = document.createElement('div');
+    controlButtons.className = 'control-buttons';
 
-            // 将按钮添加到容器中
-            controlButtons.append(upButton, leftButton, rightButton, downButton, confirmButton);
+    // 创建上下左右按钮
+    const upButton = createControlButton('↑', () => moveItem(todoItem, 0, -10));
+    const downButton = createControlButton('↓', () => moveItem(todoItem, 0, 10));
+    const leftButton = createControlButton('←', () => moveItem(todoItem, -10, 0));
+    const rightButton = createControlButton('→', () => moveItem(todoItem, 10, 0));
+    const confirmButton = createControlButton('✔', () => controlButtons.remove()); // 确认按钮，移除控制按钮
 
-            // 将待办事项和控制按钮添加到容器中
-            todoItem.appendChild(controlButtons);
-            todoContainer.appendChild(todoItem);
-        });
+    // 将按钮添加到容器中
+    controlButtons.append(upButton, leftButton, rightButton, downButton, confirmButton);
+
+    // 将待办事项和控制按钮添加到容器中
+    todoItem.appendChild(controlButtons);
+    todoContainer.appendChild(todoItem);
+});
 
         // 创建单个控制按钮
         function createControlButton(text, onClick) {

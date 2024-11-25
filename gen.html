@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo 拖拽创建</title>
+    <title>ToDo 控制移动</title>
     <style>
         * {
             margin: 0;
@@ -19,6 +19,7 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            transform: scale(0.8); /* 缩小整体大小到 80% */
         }
 
         .todo-container {
@@ -41,12 +42,36 @@
             color: #000; /* 纯黑字体 */
             text-align: left;
             line-height: 1.5;
-            cursor: grab;
+            background: rgba(255, 255, 255, 0.8); /* 背景色，便于区分 */
+            padding: 5px;
+            border-radius: 5px;
             user-select: none;
         }
 
-        .todo-item:active {
-            cursor: grabbing;
+        .control-buttons {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            top: 0;
+            left: 100%;
+            transform: translate(-50%, 0);
+        }
+
+        .control-buttons button {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .control-buttons button:hover {
+            background-color: #0056b3;
         }
 
         .add-button {
@@ -92,44 +117,44 @@
             const todoItem = document.createElement('div');
             todoItem.className = 'todo-item';
             todoItem.contentEditable = 'true'; // 可编辑
-            todoItem.draggable = 'true'; // 可拖拽
             todoItem.textContent = `待办事项 ${todoCount}`; // 默认文字
             todoItem.style.top = `${50 * todoCount}px`; // 默认位置：逐渐向下排列
             todoItem.style.left = '10%'; // 默认居左
 
-            // 添加拖拽事件
-            todoItem.addEventListener('dragstart', dragStart);
-            todoItem.addEventListener('dragend', dragEnd);
+            // 创建控制按钮容器
+            const controlButtons = document.createElement('div');
+            controlButtons.className = 'control-buttons';
 
-            // 将新建的待办事项添加到容器中
+            // 创建上下左右按钮
+            const upButton = createControlButton('↑', () => moveItem(todoItem, 0, -10));
+            const downButton = createControlButton('↓', () => moveItem(todoItem, 0, 10));
+            const leftButton = createControlButton('←', () => moveItem(todoItem, -10, 0));
+            const rightButton = createControlButton('→', () => moveItem(todoItem, 10, 0));
+            const confirmButton = createControlButton('✔', () => controlButtons.remove()); // 确认按钮，移除控制按钮
+
+            // 将按钮添加到容器中
+            controlButtons.append(upButton, leftButton, rightButton, downButton, confirmButton);
+
+            // 将待办事项和控制按钮添加到容器中
+            todoItem.appendChild(controlButtons);
             todoContainer.appendChild(todoItem);
         });
 
-        // 拖拽功能
-        let activeItem = null;
-
-        function dragStart(e) {
-            activeItem = this; // 获取当前拖拽的元素
-            this.style.opacity = '0.5'; // 拖拽时透明化
+        // 创建单个控制按钮
+        function createControlButton(text, onClick) {
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.onclick = onClick;
+            return button;
         }
 
-        function dragEnd(e) {
-            activeItem = null;
-            this.style.opacity = '1'; // 恢复透明度
+        // 移动待办事项
+        function moveItem(item, deltaX, deltaY) {
+            const currentTop = parseInt(item.style.top || '0', 10);
+            const currentLeft = parseInt(item.style.left || '0', 10);
+            item.style.top = `${currentTop + deltaY}px`;
+            item.style.left = `${currentLeft + deltaX}px`;
         }
-
-        todoContainer.addEventListener('dragover', (e) => {
-            e.preventDefault(); // 阻止默认行为，允许拖拽
-            if (activeItem) {
-                const rect = todoContainer.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                // 更新拖拽元素位置
-                activeItem.style.left = `${x - activeItem.offsetWidth / 2}px`;
-                activeItem.style.top = `${y - activeItem.offsetHeight / 2}px`;
-            }
-        });
     </script>
 </body>
 </html>

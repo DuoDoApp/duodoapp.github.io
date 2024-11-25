@@ -19,34 +19,33 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            transform: scale(0.8); /* 缩小整体大小到 80% */
-            padding-top: 50px; /* 调整页面距离屏幕顶部的距离 */
+            transform: scale(0.8);
+            padding-top: 20px;
             box-sizing: border-box;
         }
 
         .todo-container {
             position: relative;
-            width: 402px; /* 缩小比例，适配 804px 宽背景 */
-            height: 813px; /* 缩小比例，适配 1626px 高背景 */
-            background-image: url('https://image-qiniu.jellow.site/FojisuFeHGTRY7CfGfkclsNODTnb.jpg');
+            width: 402px;
+            height: 813px;
             background-size: cover;
             background-position: center;
         }
 
         .todo-item {
             position: absolute;
-            width: 80%; /* 待办事项的宽度 */
-            font-size: 24px; /* 字体大小 */
+            width: 80%;
+            font-size: 24px;
             font-weight: bold;
-            color: #000; /* 纯黑字体 */
+            color: #000;
             text-align: left;
             line-height: 1.5;
-            cursor: grab; /* 鼠标样式为抓取 */
+            cursor: grab;
             user-select: none;
         }
 
         .todo-item:active {
-            cursor: grabbing; /* 拖拽时样式 */
+            cursor: grabbing;
         }
 
         .control-buttons {
@@ -105,54 +104,55 @@
     <div class="add-button" id="addButton">+</div>
 
     <script>
+        // 背景图片数组
+        const backgroundImages = [
+            'https://image-qiniu.jellow.site/FpPhN_2m6QNdxlQIV06H63KWqS_0.jpg',
+            'https://image-qiniu.jellow.site/FmypTaEWDPvnysQBIR_gvDRO06wv.jpg',
+            'https://image-qiniu.jellow.site/Fp1vauQTjHyb56y_AaOv30PIYfkF.jpg',
+            'https://image-qiniu.jellow.site/Fi_-T3XF2YVgMJfwWNIArUtGKeRH.jpg'
+        ];
+
+        // 随机选择背景图片
+        window.onload = function() {
+            const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+            document.getElementById('todoApp').style.backgroundImage = `url('${backgroundImages[randomIndex]}')`;
+        };
+
         const todoContainer = document.getElementById('todoApp');
         const addButton = document.getElementById('addButton');
 
-        let todoCount = 0; // 用于生成唯一的待办事项 ID
+        let todoCount = 0;
 
-        // 添加待办事项
         addButton.addEventListener('click', () => {
             todoCount++;
 
-            // 获取容器的宽高
             const containerWidth = todoContainer.offsetWidth;
             const containerHeight = todoContainer.offsetHeight;
 
             const todoItem = document.createElement('div');
             todoItem.className = 'todo-item';
-            todoItem.contentEditable = 'true'; // 可编辑
-            todoItem.textContent = `待办事项 ${todoCount}`; // 默认文字
+            todoItem.contentEditable = 'true';
+            todoItem.textContent = `待办事项 ${todoCount}`;
 
-            // 设置新任务位置为正中间
-            todoItem.style.top = `${containerHeight / 2}px`; // 容器高度的一半
-            todoItem.style.left = `${containerWidth / 2}px`; // 容器宽度的一半
+            todoItem.style.top = `${containerHeight / 2}px`;
+            todoItem.style.left = `${containerWidth / 2}px`;
 
-            // 创建控制按钮容器
             const controlButtons = document.createElement('div');
             controlButtons.className = 'control-buttons';
 
-            // 创建确认按钮
             const confirmButton = createControlButton('✔ 确认', (e) => {
-                e.preventDefault(); // 阻止触发编辑
-                controlButtons.remove(); // 确认按钮，移除控制按钮
-                todoItem.contentEditable = false; // 确认后不可编辑
-                todoItem.style.cursor = 'default'; // 确认后取消抓取样式
+                e.preventDefault();
+                controlButtons.remove();
+                todoItem.contentEditable = false;
+                todoItem.style.cursor = 'default';
             });
 
-            // 将确认按钮添加到容器中
             controlButtons.append(confirmButton);
-
-            // 将控制按钮添加到待办项
             todoItem.appendChild(controlButtons);
-
-            // 启用拖拽功能
             enableDrag(todoItem);
-
-            // 将待办事项添加到容器中
             todoContainer.appendChild(todoItem);
         });
 
-        // 创建单个控制按钮
         function createControlButton(text, onClick) {
             const button = document.createElement('button');
             button.textContent = text;
@@ -160,13 +160,11 @@
             return button;
         }
 
-        // 启用拖拽功能（支持鼠标和触屏）
         function enableDrag(item) {
-            let isDragging = false; // 拖拽状态
-            let startX, startY; // 鼠标或触屏初始位置
-            let initialLeft, initialTop; // 元素初始位置
+            let isDragging = false;
+            let startX, startY;
+            let initialLeft, initialTop;
 
-            // 开始拖拽（鼠标或触屏）
             const startDrag = (e) => {
                 isDragging = true;
                 const touch = e.type === "touchstart" ? e.touches[0] : e;
@@ -174,10 +172,9 @@
                 startY = touch.clientY;
                 initialLeft = parseInt(item.style.left || 0, 10);
                 initialTop = parseInt(item.style.top || 0, 10);
-                item.style.cursor = 'grabbing'; // 修改鼠标样式
+                item.style.cursor = 'grabbing';
             };
 
-            // 拖拽中（鼠标或触屏）
             const onDrag = (e) => {
                 if (!isDragging) return;
 
@@ -189,20 +186,17 @@
                 item.style.top = `${initialTop + deltaY}px`;
             };
 
-            // 停止拖拽（鼠标或触屏）
             const stopDrag = () => {
                 if (isDragging) {
                     isDragging = false;
-                    item.style.cursor = 'grab'; // 恢复鼠标样式
+                    item.style.cursor = 'grab';
                 }
             };
 
-            // 监听鼠标事件
             item.addEventListener('mousedown', startDrag);
             window.addEventListener('mousemove', onDrag);
             window.addEventListener('mouseup', stopDrag);
 
-            // 监听触屏事件
             item.addEventListener('touchstart', startDrag);
             window.addEventListener('touchmove', onDrag);
             window.addEventListener('touchend', stopDrag);

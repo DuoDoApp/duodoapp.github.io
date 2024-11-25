@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo 拖拽创建</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .todo-container {
+            position: relative;
+            width: 402px; /* 缩小比例，适配 804px 宽背景 */
+            height: 813px; /* 缩小比例，适配 1626px 高背景 */
+            background-image: url('https://image-qiniu.jellow.site/FtQNOCbOsg537aG7PfNvXMvgexJO.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-item {
+            position: absolute;
+            width: 80%; /* 待办事项的宽度 */
+            left: 10%;
+            font-size: 24px; /* 字体大小 */
+            font-weight: bold;
+            color: #000; /* 纯黑字体 */
+            text-align: left;
+            line-height: 1.5;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .todo-item:active {
+            cursor: grabbing;
+        }
+
+        .add-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container" id="todoApp">
+        <!-- 初始页面无待办事项 -->
+    </div>
+
+    <!-- 添加待办事项按钮 -->
+    <div class="add-button" id="addButton">+</div>
+
+    <script>
+        const todoContainer = document.getElementById('todoApp');
+        const addButton = document.getElementById('addButton');
+
+        let todoCount = 0; // 用于生成唯一的待办事项 ID
+
+        // 添加待办事项
+        addButton.addEventListener('click', () => {
+            todoCount++;
+            const todoItem = document.createElement('div');
+            todoItem.className = 'todo-item';
+            todoItem.contentEditable = 'true'; // 可编辑
+            todoItem.draggable = 'true'; // 可拖拽
+            todoItem.textContent = `待办事项 ${todoCount}`; // 默认文字
+            todoItem.style.top = `${50 * todoCount}px`; // 默认位置：逐渐向下排列
+            todoItem.style.left = '10%'; // 默认居左
+
+            // 添加拖拽事件
+            todoItem.addEventListener('dragstart', dragStart);
+            todoItem.addEventListener('dragend', dragEnd);
+
+            // 将新建的待办事项添加到容器中
+            todoContainer.appendChild(todoItem);
+        });
+
+        // 拖拽功能
+        let activeItem = null;
+
+        function dragStart(e) {
+            activeItem = this; // 获取当前拖拽的元素
+            this.style.opacity = '0.5'; // 拖拽时透明化
+        }
+
+        function dragEnd(e) {
+            activeItem = null;
+            this.style.opacity = '1'; // 恢复透明度
+        }
+
+        todoContainer.addEventListener('dragover', (e) => {
+            e.preventDefault(); // 阻止默认行为，允许拖拽
+            if (activeItem) {
+                const rect = todoContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // 更新拖拽元素位置
+                activeItem.style.left = `${x - activeItem.offsetWidth / 2}px`;
+                activeItem.style.top = `${y - activeItem.offsetHeight / 2}px`;
+            }
+        });
+    </script>
+</body>
+</html>

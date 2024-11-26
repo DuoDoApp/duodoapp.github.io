@@ -1,7 +1,7 @@
 ---
 title: DuoDo App
 ---
-# DuoDo App Product Brief
+# Product Brief
 
 ## I. App Introduction
 DuoDo is a social task management app that makes daily activities more engaging through friend collaboration. Whether it's studying, hanging out, or planning events, DuoDo turns routine tasks into social experiences.

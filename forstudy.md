@@ -1,3 +1,6 @@
+---
+title: DuoDo App
+---
 # DuoDo App Product Brief
 
 ## I. App Introduction

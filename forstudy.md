@@ -30,17 +30,8 @@ DuoDo is a social task management app that makes daily activities more engaging 
 
 ### App Screenshots
 
-#### Task List Homepage
-![Task List Homepage](https://image-qiniu.jellow.site/FgfquAeekJxGA3dxolSnFbQ7Gc1X.jpg)
-
-#### Create New Task
-![Create New Task](https://image-qiniu.jellow.site/FnIHsBv32r_lKgEJ3Q_L83YgPpwb.jpg)
-
-#### Friend Rankings
-![Friend Rankings](https://image-qiniu.jellow.site/FpClq9mXmcUKhdMQ56TUHUb3gKvq.jpg)
-
-#### Personal Achievements
-![Personal Achievements](https://image-qiniu.jellow.site/FumMeK0ZeT2DB5lIOBM27lARXG4B.jpg)
+#### Task List, Create New Task, Create New Task, Personal Achievements
+![Task List Homepage](https://image-qiniu.jellow.site/FtziX_GUCzJAagBu1-9Y_heSK4w1.png)
 
 ## II. Usage Scenarios
 

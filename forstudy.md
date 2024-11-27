@@ -7,6 +7,23 @@ date: 2024-11-21
 ---
 
 # Product Brief
+- [Product Brief](#product-brief)
+  - [I. App Introduction](#i-app-introduction)
+    - [Key Features](#key-features)
+    - [App Screenshots](#app-screenshots)
+  - [II. Usage Scenarios](#ii-usage-scenarios)
+    - [Study Together](#study-together)
+    - [Friend Hangouts](#friend-hangouts)
+    - [Couple Activities](#couple-activities)
+    - [Family & Others](#family--others)
+  - [III. Late Night Study Vlog Script](#iii-late-night-study-vlog-script)
+    - [Scene 1: Night Atmosphere](#scene-1-night-atmosphere)
+    - [Scene 2: TikTok & Notifications](#scene-2-tiktok--notifications)
+    - [Scene 3: App Launch](#scene-3-app-launch)
+    - [Scene 4: Task Completion](#scene-4-task-completion)
+    - [Scene 5: Revenge Time](#scene-5-revenge-time)
+    - [Scene 6: Achievements](#scene-6-achievements)
+    - [Filming Focus](#filming-focus)
 
 ## I. App Introduction
 DuoDo is a multi-person task management app that makes daily activities more engaging through friend collaboration. Whether it's studying, hanging out, or planning events, DuoDo turns routine tasks into social experiences.

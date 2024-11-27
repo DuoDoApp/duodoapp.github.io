@@ -3,24 +3,9 @@ title: DuoDo App - Social Task Management Application
 description: DuoDo is a social task management app that transforms daily activities into engaging experiences through friend collaboration, perfect for studying, socializing, and event planning.
 keywords: DuoDo, task management, social app, study tool, collaboration software, time management, social tasks, study groups
 author: DuoDo Team
-date: 2024-01-01
-last_modified_at: 2024-01-01
-language: en
-categories: [Product Brief, Applications]
-tags: [Task Management, Social App, Study Tool, Collaboration Software]
-permalink: /product-brief/
-image: https://image-qiniu.jellow.site/FtziX_GUCzJAagBu1-9Y_heSK4w1.png
-excerpt: DuoDo makes studying, socializing, and life planning more engaging. Through friend collaboration, real-time progress tracking, and interactive nudging system, it transforms daily tasks into social experiences.
-toc: true
-layout: default
-meta:
-  og:type: product
-  og:title: DuoDo App - Transform Daily Tasks into Social Experiences
-  og:description: Social task management app for studying, hanging out, and planning events with friends
-  twitter:card: summary_large_image
-  twitter:title: DuoDo App - Social Task Management
-  twitter:description: Make daily activities more engaging through friend collaboration
+date: 2024-11-21
 ---
+
 # Product Brief
 
 ## I. App Introduction

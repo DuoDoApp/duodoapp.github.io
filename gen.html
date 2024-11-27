@@ -61,9 +61,25 @@
             outline: none;
         }
 
+        .font-normal {
+            font-size: 24px;
+            color: #000;
+        }
+
+        .font-small {
+            font-size: 10px;
+            color: #000;
+        }
+
+        .font-medium {
+            font-size: 19px;
+            color: #666;
+        }
+
         .control-buttons {
             display: flex;
             justify-content: center;
+            gap: 10px;
             width: 100%;
         }
 
@@ -113,10 +129,10 @@
 
     <script>
         const backgroundImages = [
-            'https://image-qiniu.jellow.site/FpPhN_2m6QNdxlQIV06H63KWqS_0.jpg',
-            'https://image-qiniu.jellow.site/FmypTaEWDPvnysQBIR_gvDRO06wv.jpg',
-            'https://image-qiniu.jellow.site/Fp1vauQTjHyb56y_AaOv30PIYfkF.jpg',
-            'https://image-qiniu.jellow.site/Fi_-T3XF2YVgMJfwWNIArUtGKeRH.jpg'
+            'https://image-qiniu.jellow.site/Fj3ULEVaW3G6WFrihmbqr7yuekSY.jpg',
+            'https://image-qiniu.jellow.site/Fig7d95S2Bwg1oEBNUjJNwNxlRFR.jpg',
+            'https://image-qiniu.jellow.site/FqUZlSLUmQYcfhnp9rLS_A0LyFZp.jpg',
+            'https://image-qiniu.jellow.site/FjH8uRwybuo_oadIDNNJNLoeeSki.jpg'
         ];
 
         window.onload = function() {
@@ -128,6 +144,7 @@
         const addButton = document.getElementById('addButton');
 
         let todoCount = 0;
+        let fontStyles = ['font-normal', 'font-small', 'font-medium'];
 
         addButton.addEventListener('click', () => {
             todoCount++;
@@ -140,7 +157,7 @@
 
             // 创建内容div
             const todoContent = document.createElement('div');
-            todoContent.className = 'todo-content';
+            todoContent.className = 'todo-content font-normal';
             todoContent.contentEditable = 'true';
             todoContent.textContent = `待办事项 ${todoCount}`;
 
@@ -155,7 +172,15 @@
                 todoItem.style.cursor = 'default';
             });
 
-            controlButtons.append(confirmButton);
+            const toggleButton = createControlButton('切换字体', (e) => {
+                e.preventDefault();
+                const currentStyle = todoContent.className.split(' ')[1];
+                const currentIndex = fontStyles.indexOf(currentStyle);
+                const nextIndex = (currentIndex + 1) % fontStyles.length;
+                todoContent.className = `todo-content ${fontStyles[nextIndex]}`;
+            });
+
+            controlButtons.append(confirmButton, toggleButton);
             
             // 将内容和按钮添加到todoItem
             todoItem.appendChild(todoContent);
@@ -183,7 +208,7 @@
             let initialLeft, initialTop;
 
             const startDrag = (e) => {
-                if (e.target.tagName === 'BUTTON') return; // 如果点击的是按钮，不启动拖拽
+                if (e.target.tagName === 'BUTTON') return;
                 isDragging = true;
                 const touch = e.type === "touchstart" ? e.touches[0] : e;
                 startX = touch.clientX;

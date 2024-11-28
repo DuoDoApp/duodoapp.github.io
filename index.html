@@ -4,14 +4,14 @@
     <!-- 元数据和头部内容 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DuoDo - Friendly Task Management App for Families and ADHD | Collaborate & Achieve Together</title>
-    <meta name="description" content="DuoDo - ADHD-friendly task management app for families. Collaborate, plan, and achieve goals together with smart scheduling and real-time sync.">
+    <title>DuoDo - Social Task Management App | Collaborate & Achieve Together</title>
+    <meta name="description" content="DuoDo - A collaborative task management app that makes daily activities more engaging through friend interactions. Plan, execute, and achieve goals together.">
     <meta name="keywords" content="ADHD task management, family collaboration app, task planning, routine management, ADHD support, habit share">
     <meta name="author" content="DuoDo Inc.">
 
     <!-- Open Graph Meta Tags for Social Media Preview -->
-    <meta property="og:title" content="DuoDo - Make Task Collaboration Fun">
-    <meta property="og:description" content="One app to connect ADHD individuals with their families. Plan, execute, and achieve goals together.">
+    <meta property="og:title" content="DuoDo - Make Task Management Social">
+    <meta property="og:description" content="One app to connect with friends through daily tasks. Plan, execute, and achieve goals together.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="[Your OG Image URL]">
 
@@ -44,7 +44,7 @@
       "@context": "https://schema.org",
       "@type": "MobileApplication",
       "name": "DuoDo",
-      "description": "ADHD-friendly task management app helping families collaborate and achieve goals together",
+      "description": "Social task management app helping friends collaborate and achieve goals together",
       "operatingSystem": "iOS, Android",
       "applicationCategory": "Productivity",
       "offers": {
@@ -58,108 +58,61 @@
     <!-- 主脚本 -->
     <script>
     window.addEventListener('DOMContentLoaded', function() {
-        const downloadButtons = document.querySelectorAll('.store-button');
-
-        // 获取URL参数
-        const urlParams = new URLSearchParams(window.location.search);
-        const source = urlParams.get('source');
-
+        const downloadButtons = document.querySelectorAll('.download-button');
+        const languageSwitch = document.querySelector('.language-switch');
+        
         // 检查浏览器语言是否为中文
         const isChineseLanguage = () => {
-            const language = navigator.language || navigator.userLanguage;
+            const language = navigator.language || navigator.userLanguage || 'en';
             return language.startsWith('zh');
         };
-
-        // 更新页面内容和下载链接的函数
-        const updatePageContent = (source, isChinese) => {
-            let formUrl = '';
-            // 根据浏览器语言决定表单链接
-            if (isChinese) {
-                // 浏览器语言为中文，使用金数据链接
-                formUrl = 'https://j.okkla.cn/render/htRiSRGL?t=1732715185225';
-            } else {
-                // 浏览器语言不是中文，使用谷歌表单链接
-                //https://docs.google.com/forms/d/e/1FAIpQLSeWUQ0xBAl9tZ82sMUZ6K2Dxjor1hPMwPDJ9bWxodcbCuUUDw/viewform?usp=sf_link
-                //https://docs.google.com/forms/d/e/1FAIpQLSf5FSiQlby8bJbUe-nXIL75PjpoEB-t-JMbUryegEkHubUzXQ/viewform?usp=sf_link
-                formUrl = 'https://j.okkla.cn/render/lzgJiKWM?t=1732714735731';
-                if (source === 'Mommit') {
-                    formUrl = 'https://j.okkla.cn/render/lzgJiKWM?t=1732714735731';
+        
+        // 获取当前语言设置
+        let currentLang = localStorage.getItem('duodo-lang') || (isChineseLanguage() ? 'zh' : 'en');
+        
+        // 根据语言切换内容
+        const switchLanguage = (lang) => {
+            currentLang = lang;
+            localStorage.setItem('duodo-lang', lang);
+            
+            // 切换按钮文本
+            languageSwitch.textContent = lang === 'zh' ? 'Language：中文' : 'Language: English';
+            
+            // 切换所有文本内容
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                try {
+                    const langData = JSON.parse(el.getAttribute('data-lang'));
+                    if (langData && langData[lang]) {
+                        el.textContent = langData[lang];
+                    }
+                } catch (e) {
+                    console.error('解析 data-lang 属性时发生错误：', e);
                 }
-            }
-
-            // 更新下载按钮的链接
+            });
+            
+            // 更新下载按钮链接
+            const formUrl = lang === 'zh'
+                ? 'https://j.okkla.cn/render/htRiSRGL?t=1732715185225'
+                : 'https://j.okkla.cn/render/lzgJiKWM?t=1732714735731';
+                
             downloadButtons.forEach(button => {
                 button.href = formUrl;
             });
-
-            // 更新页面内容
-            const h1 = document.querySelector('.hero h1');
-            const heroP = document.querySelector('.hero p');
-            const featureSections = document.querySelectorAll('.feature-grid');
-            const featureCards = document.querySelectorAll('.feature-card');
-            const finalCTA = document.querySelector('section.hero:last-of-type h2');
-            const finalCTAP = document.querySelector('section.hero:last-of-type p');
-
-            if (source === 'Mommit') {
-                // Mommit版本文案
-                h1.textContent = "DuoDo: Your Family Task Management Companion";
-                heroP.textContent = "Simplify your family life with smart scheduling, chore management, and real-time coordination.";
-                
-                featureSections[0].querySelector('h2').textContent = "Designed for Busy Moms";
-                featureSections[0].querySelector('p').textContent = "Streamline your family's daily routines with intuitive task management. Delegate chores, track progress, and maintain household harmony with ease.";
-                
-                featureSections[1].querySelector('h2').textContent = "Kid-Friendly Chore Management";
-                featureSections[1].querySelector('p').textContent = "Engage your children in household responsibilities through gamified tasks and visual rewards. Build lasting habits while making chores fun.";
-                
-                featureSections[2].querySelector('h2').textContent = "Family Calendar Integration";
-                featureSections[2].querySelector('p').textContent = "Keep everyone on the same page with shared calendars, automated reminders, and easy schedule coordination for the whole family.";
-                
-                featureCards[0].querySelector('h3').textContent = "Smart Scheduling";
-                featureCards[0].querySelector('p').textContent = "Efficiently manage your family's busy schedule with intelligent task distribution and reminders.";
-                
-                featureCards[1].querySelector('h3').textContent = "Chore Tracking";
-                featureCards[1].querySelector('p').textContent = "Monitor and reward children's task completion while building responsibility.";
-                
-                featureCards[2].querySelector('h3').textContent = "Family Sync";
-                featureCards[2].querySelector('p').textContent = "Keep the whole family coordinated with real-time updates and shared task lists.";
-                
-                finalCTA.textContent = "Bring Order to Your Family Life";
-                finalCTAP.textContent = "Join thousands of families organizing their daily lives efficiently with DuoDo.";
-            } else {
-                // 默认ADHD版本文案
-                h1.textContent = "DuoDo: Friendly Task Management for family or ADHD";
-                heroP.textContent = "Empowering individuals and families and friends to plan, execute, and achieve goals together.";
-                
-                featureSections[0].querySelector('h2').textContent = "Friendly Task Management for family or ADHD";
-                featureSections[0].querySelector('p').textContent = "Designed specifically for ADHD individuals with real-time synchronization, visual task tracking, and family collaboration features. Simple interface with powerful reminder systems to maintain focus and productivity.";
-                
-                featureSections[1].querySelector('h2').textContent = "Personalized Task Creation";
-                featureSections[1].querySelector('p').textContent = "Adaptive task creation interface with ADHD-friendly features including visual cues, flexible scheduling, and smart reminders. Create routines that work for your unique needs.";
-                
-                featureSections[2].querySelector('h2').textContent = "Family Support Network";
-                featureSections[2].querySelector('p').textContent = "Build stronger family connections through collaborative task management. Share progress, celebrate achievements, and grow together in a supportive environment.";
-                
-                featureCards[0].querySelector('h3').textContent = "Smart ADHD Support";
-                featureCards[0].querySelector('p').textContent = "Customizable task settings and reminders designed specifically for ADHD management needs.";
-                
-                featureCards[1].querySelector('h3').textContent = "Family Collaboration";
-                featureCards[1].querySelector('p').textContent = "Bridge the communication gap between ADHD individuals and family members for better understanding and support.";
-                
-                featureCards[2].querySelector('h3').textContent = "Privacy First";
-                featureCards[2].querySelector('p').textContent = "Enterprise-grade security protecting your family's personal information and task data.";
-                
-                finalCTA.textContent = "Transform Your Family's Daily Life with DuoDo";
-                finalCTAP.textContent = "Join thousands of families managing ADHD challenges successfully with DuoDo.";
-            }
         };
-
-        // 检查浏览器语言并更新页面
-        const isChinese = isChineseLanguage();
-        updatePageContent(source, isChinese);
+        
+        // 绑定语言切换事件
+        if (languageSwitch) {
+            languageSwitch.addEventListener('click', () => {
+                switchLanguage(currentLang === 'zh' ? 'en' : 'zh');
+            });
+        }
+        
+        // 初始化语言
+        switchLanguage(currentLang);
     });
     </script>
 
-    <!-- 样式表 -->
+    <!-- 式表 -->
     <style>
         /* 全局样式重置 */
         * {
@@ -367,30 +320,55 @@
                 height: 40px;
             }
         }
+
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .language-switch:hover {
+            background: #F7FAFC;
+            transform: translateY(-1px);
+        }
+
+        .download-button {
+            display: inline-block;
+            background-color: #B163FF;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(177, 99, 255, 0.2);
+        }
     </style>
 </head>
 <body>
     <!-- 头部部分 -->
     <header class="hero">
         <div class="container">
-                        <nav class="download-buttons">
-                <a href="#" class="store-button" target="_blank" rel="noopener">
-                    <img src="https://image-qiniu.jellow.site/FjUqJ_B1gVMqdEI1tcoGNwvM0J9o.png" alt="Download DuoDo on the App Store">
-                </a>
-            
-            </nav>
-            
-            <h1>DuoDo: Friendly Task Management for family or ADHD</h1>
-            <p>Empowering individuals, families, and friends to plan, execute, and achieve goals together</p>
+            <button class="language-switch">English</button>
+            <h1 data-lang='{"en":"DuoDo: Social Task Management Made Fun","zh":"DuoDo: 让任务管理更有趣"}'>DuoDo: Social Task Management Made Fun</h1>
+            <p data-lang='{"en":"Transform daily tasks into engaging social experiences with friends","zh":"和朋友一起,让日常任务变得更趣"}'>Transform daily tasks into engaging social experiences with friends</p>
             <nav class="download-buttons">
-                <a href="#" class="store-button" target="_blank" rel="noopener">
-                    <img src="https://static.wixstatic.com/media/d637c8_9199612003314ee59b77434839dc7057~mv2.png" alt="Download DuoDo on the App Store">
-                </a>
-                <a href="#" class="store-button" target="_blank" rel="noopener">
-                    <img src="https://static.wixstatic.com/media/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png" alt="Get DuoDo on Google Play">
+                <a href="#" class="download-button" target="_blank" rel="noopener">
+                    <span data-lang='{"en":"Download DuoDo","zh":"下载 DuoDo"}'>Download DuoDo</span>
                 </a>
             </nav>
-            <p>Any questions? Mail to DuoDoinc@gmail.com</p>
+            <p>Email: DuoDoinc@gmail.com</p>
         </div>
     </header>
 
@@ -402,44 +380,44 @@
                 <!-- 功能1 -->
                 <div class="feature-grid">
                     <div class="feature-content">
-                        <h2>Friendly Task Management for family or ADHD</h2>
-                        <p>Designed specifically for ADHD individuals with real-time synchronization, visual task tracking, and family collaboration features. Simple interface with powerful reminder systems to maintain focus and productivity.</p>
+                        <h2 data-lang='{"en":"Collaborative Task Management","zh":"多人协作任务管理"}'>Collaborative Task Management</h2>
+                        <p data-lang='{"en":"Create and share tasks with friends, track progress together, and motivate each other through real-time interactions. Simple interface with powerful social features to keep everyone engaged and productive.","zh":"创建并与好友分享任务，一起追踪进度，通过实时互动互相激励。简单的界面配合强大的社交功能，让每个人都保持参与度和效率。"}'>Create and share tasks with friends...</p>
                     </div>
                     <div class="feature-image">
-                        <img src="https://image-qiniu.jellow.site/FgfquAeekJxGA3dxolSnFbQ7Gc1X.jpg" alt="DuoDo's intuitive task management interface for ADHD users" loading="lazy">
+                        <img src="https://image-qiniu.jellow.site/FgfquAeekJxGA3dxolSnFbQ7Gc1X.jpg" alt="DuoDo's intuitive task management interface">
                     </div>
                 </div>
 
                 <!-- 功能2 -->
                 <div class="feature-grid">
                     <div class="feature-image">
-                        <img src="https://image-qiniu.jellow.site/FnIHsBv32r_lKgEJ3Q_L83YgPpwb.jpg" alt="DuoDo's customizable task creation interface for ADHD needs" loading="lazy">
+                        <img src="https://image-qiniu.jellow.site/FnIHsBv32r_lKgEJ3Q_L83YgPpwb.jpg" alt="DuoDo's task creation interface">
                     </div>
                     <div class="feature-content">
-                        <h2>Personalized Task Creation</h2>
-                        <p>Adaptive task creation interface with ADHD-friendly features including visual cues, flexible scheduling, and smart reminders. Create routines that work for your unique needs.</p>
+                        <h2 data-lang='{"en":"Smart Task Creation","zh":"智能任务创建"}'>Smart Task Creation</h2>
+                        <p data-lang='{"en":"Intuitive task creation interface with flexible scheduling, visual cues, and smart reminders. Create routines that work for different scenarios - from study sessions to social hangouts.","zh":"直观的任务创建界面，灵活的日程安排，视觉提示和智能提醒。创建适用于不同场景的日常计划 - 从学习会议到社交聚会。"}'>Intuitive task creation interface...</p>
                     </div>
                 </div>
 
                 <!-- 功能3 -->
                 <div class="feature-grid">
                     <div class="feature-content">
-                        <h2>Habit share tracker with friends</h2>
-                        <p>Build stronger habit share connections through collaborative task management. Share habit, celebrate achievements, and grow together in a supportive environment.</p>
+                        <h2 data-lang='{"en":"Social Progress Tracking","zh":"社交进度追踪"}'>Social Progress Tracking</h2>
+                        <p data-lang='{"en":"Build stronger connections through collaborative task management. Share achievements, celebrate milestones, and grow together in a supportive environment.","zh":"通过协作任务管理建立更紧密的联系。分享成就，庆祝里程碑，在互助环境中共同成长。"}'>Build stronger connections...</p>
                     </div>
                     <div class="feature-image">
-                        <img src="https://image-qiniu.jellow.site/FpClq9mXmcUKhdMQ56TUHUb3gKvq.jpg" alt="DuoDo's family collaboration and support features" loading="lazy">
+                        <img src="https://image-qiniu.jellow.site/FpClq9mXmcUKhdMQ56TUHUb3gKvq.jpg" alt="DuoDo's collaboration features">
                     </div>
                 </div>
                 
                 <!-- 功能4 -->
                 <div class="feature-grid">
                     <div class="feature-image">
-                        <img src="https://image-qiniu.jellow.site/FumMeK0ZeT2DB5lIOBM27lARXG4B.jpg" alt="DuoDo's profile progress features" loading="lazy">
+                        <img src="https://image-qiniu.jellow.site/FumMeK0ZeT2DB5lIOBM27lARXG4B.jpg" alt="DuoDo's progress features">
                     </div>
                     <div class="feature-content">
-                        <h2>Track your progress</h2>
-                        <p>Turning Daily Tasks into Consistent Victories, your journey, your victories.</p>
+                        <h2 data-lang='{"en":"Track your progress","zh":"追踪你的进步"}'>Track your progress</h2>
+                        <p data-lang='{"en":"Turning daily tasks into consistent victories, your journey, your victories.","zh":"将日常任务转化为持续的胜利，这是你的旅程，你的成就。"}'>Turning daily tasks into consistent victories...</p>
                     </div>
                 </div>
             </div>
@@ -449,16 +427,16 @@
         <section class="container">
             <div class="app-features">
                 <article class="feature-card">
-                    <h3>Smart ADHD Support</h3>
-                    <p>Customizable task settings and reminders designed specifically for ADHD management needs.</p>
+                    <h3 data-lang='{"en":"Smart Social Features","zh":"智能社交功能"}'>Smart Social Features</h3>
+                    <p data-lang='{"en":"Interactive nudging system and real-time progress tracking to keep everyone motivated.","zh":"互动提醒系统和实时进度追踪，让每个人都保持动力。"}'>Interactive nudging system...</p>
                 </article>
                 <article class="feature-card">
-                    <h3>Habit Share Collaboration</h3>
-                    <p>Bridge the communication gap between individuals and co-friends for better understanding and support.</p>
+                    <h3 data-lang='{"en":"Multi-scene Collaboration","zh":"多场景协作"}'>Multi-scene Collaboration</h3>
+                    <p data-lang='{"en":"Perfect for study groups, social hangouts, couple activities, and more.","zh":"完美适用于学习小组、社交聚会、情侣活动等多种场景。"}'>Perfect for study groups...</p>
                 </article>
                 <article class="feature-card">
-                    <h3>Privacy First</h3>
-                    <p>Enterprise-grade security protecting your family's personal information and task data.</p>
+                    <h3 data-lang='{"en":"Privacy First","zh":"隐私优先"}'>Privacy First</h3>
+                    <p data-lang='{"en":"Enterprise-grade security protecting your personal information and task data.","zh":"企业级安全保护，守护您的个人信息和任务数据。"}'>Enterprise-grade security...</p>
                 </article>
             </div>
         </section>
@@ -466,14 +444,11 @@
         <!-- 最终CTA部分 -->
         <section class="hero" style="background: linear-gradient(135deg, #F0F7FF 0%, #F6F0FF 100%);">
             <div class="container">
-                <h2>Transform Your Family's Daily Life with DuoDo</h2>
-                <p>Join thousands of families managing ADHD challenges successfully with DuoDo.</p>
+                <h2 data-lang='{"en":"Transform Your Daily Life with DuoDo","zh":"用DuoDo改变你的日常生活"}'>Transform Your Daily Life with DuoDo</h2>
+                <p data-lang='{"en":"Join thousands of users making task management more engaging and social with DuoDo.","zh":"加入数千名用户的行列，让任务管理更有趣、更社交化。"}'>Join thousands of users...</p>
                 <div class="download-buttons">
-                    <a href="#" class="store-button" target="_blank" rel="noopener">
-                        <img src="https://static.wixstatic.com/media/d637c8_9199612003314ee59b77434839dc7057~mv2.png" alt="Download DuoDo on the App Store">
-                    </a>
-                    <a href="#" class="store-button" target="_blank" rel="noopener">
-                        <img src="https://static.wixstatic.com/media/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png" alt="Get DuoDo on Google Play">
+                    <a href="#" class="download-button" target="_blank" rel="noopener">
+                        <span data-lang='{"en":"Download DuoDo","zh":"下载 DuoDo"}'>Download DuoDo</span>
                     </a>
                 </div>
             </div>
@@ -483,7 +458,7 @@
     <!-- 底部部分 -->
     <footer class="footer">
         <div class="container">
-            <p>Copyright © 2024 DuoDo Inc. Connect with DuoDoinc@gmail.com</p>
+            <p data-lang='{"en":"Copyright © 2024 DuoDo Inc. Connect with DuoDoinc@gmail.com","zh":"版权所有 © 2024 DuoDo Inc. 联系我们：DuoDoinc@gmail.com"}'>Copyright © 2024 DuoDo Inc...</p>
         </div>
     </footer>
 </body>

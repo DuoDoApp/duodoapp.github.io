@@ -13,13 +13,13 @@
     <meta property="og:title" content="DuoDo - Make Task Management Social">
     <meta property="og:description" content="One app to connect with friends through daily tasks. Plan, execute, and achieve goals together.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="[Your OG Image URL]">
+    <meta property="og:image" content="https://other-qiniu.jellow.site/FhAh38uEbDWbIq7UQ-rLWoIdQCXT.png">
 
     <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="https://other-qiniu.jellow.site/FhAh38uEbDWbIq7UQ-rLWoIdQCXT.png">
 
     <!-- Favicon Links -->
-    <link rel="icon" href="https://other-qiniu.jellow.site/FkdtOir93c2AXWuft_YqusMFr4RR.ico">
+    <link rel="icon" href="https://other-qiniu.jellow.site/Fma2mZPtNYiCJOsmsFJ05Dsn0OEk.ico">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -98,6 +98,17 @@
             downloadButtons.forEach(button => {
                 button.href = formUrl;
             });
+            
+            // 切换下载按钮显示
+            const enButtons = document.querySelector('.en-buttons');
+            const zhButtons = document.querySelector('.zh-buttons');
+            if (lang === 'zh') {
+                zhButtons.style.display = 'flex';
+                enButtons.style.display = 'none';
+            } else {
+                zhButtons.style.display = 'none';
+                enButtons.style.display = 'flex';
+            }
         };
         
         // 绑定语言切换事件
@@ -160,23 +171,28 @@
             display: flex;
             gap: 20px;
             justify-content: center;
-            margin-top: 2rem;
+            margin-top: 30px;
+        }
+
+        .en-buttons, .zh-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
         }
 
         .store-button {
             display: inline-block;
-            transition: transform 0.2s ease;
-            padding: 10px;
+            transition: transform 0.2s;
         }
 
         .store-button:hover {
-            transform: translateY(-2px);
+            transform: scale(1.05);
         }
 
         .store-button img {
             height: 50px;
             width: auto;
-            border-radius: 8px;
         }
 
         /* 功能部分样式 */
@@ -364,9 +380,24 @@
             <h1 data-lang='{"en":"DuoDo: Make daily tasks fun with friends","zh":"DuoDo: 和好朋友一起，让任务管理变得有趣"}'>DuoDo: Make daily tasks fun with friends</h1>
             <p data-lang='{"en":"Transform daily tasks into engaging social experiences with friends","zh":"多人协作的todo list，让日常任务更好玩"}'>Transform daily tasks into engaging social experiences with friends</p>
             <nav class="download-buttons">
-                <a href="#" class="download-button" target="_blank" rel="noopener">
-                    <span data-lang='{"en":"Download DuoDo","zh":"下载 DuoDo"}'>Download DuoDo</span>
-                </a>
+                <!-- English version buttons -->
+                <div class="en-buttons" style="display: none;">
+                    <a href="https://j.okkla.cn/render/lzgJiKWM?t=1733295644618" class="store-button" target="_blank" rel="noopener">
+                        <img src="https://static.wixstatic.com/media/d637c8_9199612003314ee59b77434839dc7057~mv2.png/v1/fill/w_358,h_102,al_c,q_95,enc_avif,quality_auto/d637c8_9199612003314ee59b77434839dc7057~mv2.png" alt="Download on App Store" style="height: 50px;">
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.ppzzzzzzzzzzzz.duodo" class="store-button" target="_blank" rel="noopener">
+                        <img src="https://static.wixstatic.com/media/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png/v1/fill/w_358,h_102,al_c,q_95,enc_avif,quality_auto/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png" alt="Get it on Google Play" style="height: 50px;">
+                    </a>
+                </div>
+                <!-- Chinese version buttons -->
+                <div class="zh-buttons" style="display: none;">
+                    <a href="https://j.okkla.cn/render/htRiSRGL?t=1733295631497" class="download-button" target="_blank" rel="noopener">
+                        <span>国内苹果和安卓下载</span>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.ppzzzzzzzzzzzz.duodo" class="store-button" target="_blank" rel="noopener">
+                        <img src="https://static.wixstatic.com/media/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png/v1/fill/w_358,h_102,al_c,q_95,enc_avif,quality_auto/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png" alt="Get it on Google Play" style="height: 50px;">
+                    </a>
+                </div>
             </nav>
             <p>Email: DuoDoinc@gmail.com</p>
         </div>
@@ -447,9 +478,24 @@
                 <h2 data-lang='{"en":"Transform Your Daily Life with DuoDo","zh":"用DuoDo改变你的日常生活"}'>Transform Your Daily Life with DuoDo</h2>
                 <p data-lang='{"en":"Join thousands of users making task management more engaging and social with DuoDo.","zh":"加入数千名用户的行列，让任务管理更有趣、更社交化。"}'>Join thousands of users...</p>
                 <div class="download-buttons">
-                    <a href="#" class="download-button" target="_blank" rel="noopener">
-                        <span data-lang='{"en":"Download DuoDo","zh":"下载 DuoDo"}'>Download DuoDo</span>
-                    </a>
+                    <!-- English version buttons -->
+                    <div class="en-buttons" style="display: none;">
+                        <a href="https://j.okkla.cn/render/lzgJiKWM?t=1733295644618" class="store-button" target="_blank" rel="noopener">
+                            <img src="https://static.wixstatic.com/media/d637c8_9199612003314ee59b77434839dc7057~mv2.png/v1/fill/w_358,h_102,al_c,q_95,enc_avif,quality_auto/d637c8_9199612003314ee59b77434839dc7057~mv2.png" alt="Download on App Store" style="height: 50px;">
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.ppzzzzzzzzzzzz.duodo" class="store-button" target="_blank" rel="noopener">
+                            <img src="https://static.wixstatic.com/media/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png/v1/fill/w_358,h_102,al_c,q_95,enc_avif,quality_auto/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png" alt="Get it on Google Play" style="height: 50px;">
+                        </a>
+                    </div>
+                    <!-- Chinese version buttons -->
+                    <div class="zh-buttons" style="display: none;">
+                        <a href="https://j.okkla.cn/render/htRiSRGL?t=1733295631497" class="download-button" target="_blank" rel="noopener">
+                            <span>国内苹果和安卓下载</span>
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.ppzzzzzzzzzzzz.duodo" class="store-button" target="_blank" rel="noopener">
+                            <img src="https://static.wixstatic.com/media/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png/v1/fill/w_358,h_102,al_c,q_95,enc_avif,quality_auto/d637c8_cc6a0af93b0b49fd89432f12640862b3~mv2.png" alt="Get it on Google Play" style="height: 50px;">
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -458,7 +504,7 @@
     <!-- 底部部分 -->
     <footer class="footer">
         <div class="container">
-            <p data-lang='{"en":"Copyright © 2024 DuoDo Inc. Connect with DuoDoinc@gmail.com","zh":"版权所有 © 2024 DuoDo Inc. 联系我们：DuoDoinc@gmail.com"}'>Copyright © 2024 DuoDo Inc...</p>
+            <p data-lang='{"en":"Copyright 2024 DuoDo Inc. Connect with DuoDoinc@gmail.com","zh":"版权所有 2024 DuoDo Inc. 联系我们：DuoDoinc@gmail.com"}'>Copyright 2024 DuoDo Inc...</p>
         </div>
     </footer>
 </body>

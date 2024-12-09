@@ -99,17 +99,27 @@
                 button.href = formUrl;
             });
             
-            // 切换下载按钮显示
-            const enButtons = document.querySelector('.en-buttons');
-            const zhButtons = document.querySelector('.zh-buttons');
-            if (lang === 'zh') {
-                zhButtons.style.display = 'flex';
-                enButtons.style.display = 'none';
-            } else {
-                zhButtons.style.display = 'none';
-                enButtons.style.display = 'flex';
-            }
-        };
+           // 切换下载按钮显示
+const enButtons = document.querySelectorAll('.en-buttons');
+const zhButtons = document.querySelectorAll('.zh-buttons');
+if (lang === 'zh') {
+    zhButtons.forEach(button => button.style.display = 'flex');
+    enButtons.forEach(button => button.style.display = 'none');
+} else {
+    zhButtons.forEach(button => button.style.display = 'none');
+    enButtons.forEach(button => button.style.display = 'flex');
+} 
+        //     // 切换下载按钮显示
+        //     const enButtons = document.querySelector('.en-buttons');
+        //     const zhButtons = document.querySelector('.zh-buttons');
+        //     if (lang === 'zh') {
+        //         zhButtons.style.display = 'flex';
+        //         enButtons.style.display = 'none';
+        //     } else {
+        //         zhButtons.style.display = 'none';
+        //         enButtons.style.display = 'flex';
+        //     }
+        // };
 
         
         // 绑定语言切换事件

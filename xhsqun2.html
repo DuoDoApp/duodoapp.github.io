@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DuoDo用户反馈群</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #fff;
+        }
+
+        .header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-image: url('https://other-qiniu.jellow.site/Fma2mZPtNYiCJOsmsFJ05Dsn0OEk.ico');
+            background-size: cover;
+            background-position: center;
+            margin-right: 12px;
+        }
+
+        .app-info h1 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .app-info p {
+            margin: 4px 0 0;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .content {
+            padding: 16px;
+        }
+
+        .preview-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 16px 0;
+            height: 200px;
+            background-image: url('https://image-qiniu.jellow.site/Fo05iCOMqTWNETnbD9bD0Ho6MP5c.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .description {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+            margin: 16px 0;
+        }
+
+        .stats {
+            display: flex;
+            gap: 16px;
+            margin: 16px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .button {
+            background-color: #fe2c55;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 16px 32px;
+            font-size: 18px;
+            width: 100%;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        #message {
+            color: #666;
+            text-align: center;
+            display: none;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="app-icon"></div>
+        <div class="app-info">
+            <h1>DuoDo App</h1>
+            <p>多人任务与清单管理</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="preview-image"></div>
+        <div class="description">
+            家庭、情侣、好友、ADHD的任务管理工具
+            <br><br>
+            和重要的人，一起完成每件小事
+        </div>
+        <div class="stats">
+            <span>3000+用户已进群</span>
+        </div>
+        <button class="button" onclick="copyAndOpen()">点击加入用户群</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        function copyAndOpen() {
+            const text = `9【长按复制这条邀请码消息，打开小红书即可加入该群】
+ 1月7日前可加入群聊"DuoDo用户反馈群" CZ1510:/#u
+🥬😛🍑🥑🦁🐼
+🐭🥮🍗😎🍙🍠`;
+
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('message').textContent = '已复制群口令，请打开小红书后，点击【允许粘贴】';
+                
+                setTimeout(() => {
+                    window.location.href = 'xhsdiscover://';
+                }, 300);
+            } catch (err) {
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('message').textContent = '复制失败，请重试';
+            }
+            
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 元数据和头部内容 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DuoDo - Social Task Management App | Collaborate & Achieve Together</title>
+    <meta name="description" content="DuoDo - A collaborative task management app that makes daily activities more engaging through friend interactions. Plan, execute, and achieve goals together.">
+    <meta name="keywords" content="𝒅𝒖𝒐𝒅𝒐.𝒐𝒌𝒌𝒍𝒂.𝒄𝒏, 𝒈𝒆𝒕𝑫𝒖𝒐𝑫𝒐.𝒄𝒐𝒎, ADHD task management, family collaboration app, task planning, routine management, ADHD support, habit share">
+    <meta name="author" content="DuoDo Inc.">
+
+    <!-- Open Graph Meta Tags for Social Media Preview -->
+    <meta property="og:title" content="DuoDo - Make Task Management Social">
+    <meta property="og:description" content="One app to connect with friends through daily tasks. Plan, execute, and achieve goals together.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://other-qiniu.jellow.site/FhAh38uEbDWbIq7UQ-rLWoIdQCXT.png">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="https://other-qiniu.jellow.site/FhAh38uEbDWbIq7UQ-rLWoIdQCXT.png">
+
+    <!-- Favicon Links -->
+    <link rel="icon" href="https://other-qiniu.jellow.site/Fma2mZPtNYiCJOsmsFJ05Dsn0OEk.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="canonical" href="https://getduodo.com" />
+    
+    <!-- Plausible Analytics（Google是G-KY6CFLZVDM） -->
+    <script defer data-domain="getduodo.com" src="https://plausible.midway.run/js/script.js"></script>
+
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KY6CFLZVDM');
+    </script>
+    <meta name="google-site-verification" content="5tigYd8bynBzpSrj9mmjGiHPhBi3InD4BbNWnuKecTU" />
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "DuoDo",
+      "description": "Social task management app helping friends collaborate and achieve goals together",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "Productivity",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- 主脚本 -->
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        const downloadButtons = document.querySelectorAll('.download-button');
+        const languageSwitch = document.querySelector('.language-switch');
+        
+        // 检查浏览器语言是否为中文
+        const isChineseLanguage = () => {
+            const language = navigator.language || navigator.userLanguage || 'en';
+            return language.startsWith('zh');
+        };
+        
+        // 获取当前语言设置
+        let currentLang = localStorage.getItem('duodo-lang') || (isChineseLanguage() ? 'zh' : 'en');
+        
+        // 根据语言切换内容
+        const switchLanguage = (lang) => {
+            currentLang = lang;
+            localStorage.setItem('duodo-lang', lang);
+            
+            // 切换按钮文本
+            languageSwitch.textContent = lang === 'zh' ? 'Language：中文' : 'Language: English';
+            
+            // 切换所有文本内容
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                try {
+                    const langData = JSON.parse(el.getAttribute('data-lang'));
+                    if (langData && langData[lang]) {
+                        el.textContent = langData[lang];
+                    }
+                } catch (e) {
+                    console.error('解析 data-lang 属性时发生错误：', e);
+                }
+            });
+            
+            // 更新下载按钮链接
+            const formUrl = lang === 'zh'
+                ? 'https://j.okkla.cn/render/htRiSRGL?t=1732715185225'
+                : 'https://j.okkla.cn/render/lzgJiKWM?t=1732714735731';
+                
+            downloadButtons.forEach(button => {
+                button.href = formUrl;
+            });
+            
+            // 切换下载按钮 显示
+            const enButtons = document.querySelector('.en-buttons');
+            const zhButtons = document.querySelector('.zh-buttons');
+            if (lang === 'zh') {
+                zhButtons.style.display = 'flex';
+                enButtons.style.display = 'none';
+            } else {
+                zhButtons.style.display = 'none';
+                enButtons.style.display = 'flex';
+            }
+        };
+
+        
+        // 绑定语言切换事件
+        if (languageSwitch) {
+            languageSwitch.addEventListener('click', () => {
+                switchLanguage(currentLang === 'zh' ? 'en' : 'zh');
+            });
+        }
+        
+        // 初始化语言
+        switchLanguage(currentLang);
+    });
+    </script>
+
+    <!-- 式表 -->
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: #FFFFFF;
+            color: #2D3748;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* 头部样式 */
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #F6F0FF 0%, #F0F7FF 100%);
+            min-height: 50vh;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #4A5568;
+            margin-bottom: 2rem;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .en-buttons, .zh-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .store-button {
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .store-button:hover {
+            transform: scale(1.05);
+        }
+
+        .store-button img {
+            height: 50px;
+            width: auto;
+        }
+
+        /* 功能部分样式 */
+        .feature-section {
+            padding: 2rem 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .feature-content {
+            padding: 2rem;
+        }
+
+        .feature-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2D3748;
+        }
+
+        .feature-content p {
+            font-size: 1.125rem;
+            color: #4A5568;
+            line-height: 1.8;
+        }
+
+        .feature-image {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .app-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: #F7FAFC;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        /* 底部样式 */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #718096;
+            font-size: 0.875rem;
+            margin-top: 2rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-features {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-image {
+                width: 250px;
+            }
+
+            .feature-content {
+                text-align: center;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .store-button img {
+                height: 45px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .feature-content h2 {
+                font-size: 2rem;
+            }
+
+            .feature-content p {
+                font-size: 1rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 4rem 0;
+                min-height: 60vh;
+            }
+
+            .feature-image {
+                width: 100%;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .store-button img {
+                height: 40px;
+            }
+        }
+
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .language-switch:hover {
+            background: #F7FAFC;
+            transform: translateY(-1px);
+        }
+
+        .download-button {
+            display: inline-block;
+            background-color: #B163FF;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(177, 99, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部部分 -->
+    <header class="hero">
+        <div class="container">
+            <button class="language-switch">English</button>
+            <h1 data-lang='{"en":"DuoDo: Make daily tasks fun with friends","zh":"DuoDo: 和好朋友一起，让任务管理变得有趣"}'>DuoDo: Make daily tasks fun with friends</h1>
+            <p data-lang='{"en":"Transform daily tasks into engaging social experiences with friends","zh":"多人协作的todo list，让日常任务更好玩"}'>Transform daily tasks into engaging social experiences with friends</p>
+            <nav class="download-buttons">
+                <!-- English version buttons -->
+                <div class="en-buttons" style="display: none;">
+                    <a href="https://j.okkla.cn/render/lzgJiKWM?t=1734431796619" class="store-button" target="_blank" rel="noopener" aria-label="Get DuoDo on App Store">
+                        <img src="https://image-qiniu.jellow.site/FgKNwrnHyr1mpzMRCFrL1R32QJ27.png" alt="Download DuoDo on App Store" style="height: 50px;">
+                    </a>
+                    <a href="https://j.okkla.cn/render/lzgJiKWM?t=1734431796619" class="store-button" target="_blank" rel="noopener" aria-label="Get DuoDo on Google Play">
+                        <img src="https://image-qiniu.jellow.site/Ftby8EEf82enUD8lwYodDbldLIo6.png" alt="Get DuoDo on Google Play" style="height: 50px;">
+                    </a>
+                </div>
+                <!-- Chinese version buttons -->
+                <div class="zh-buttons" style="display: none;">
+                 
+                                        <a href="https://j.okkla.cn/render/htRiSRGL?t=1734431754073" class="store-button" target="_blank" rel="noopener" aria-label="Get DuoDo on App Store">
+                        <img src="https://image-qiniu.jellow.site/Fhhfef3tiUJc4g6CThpHCzf3jRWk.png" alt="App Store下载DuoDo" style="height: 50px;">
+                    </a>
+                    <a href="https://j.okkla.cn/render/htRiSRGL?t=1734431754073" class="store-button" target="_blank" rel="noopener" aria-label="Get DuoDo on Google Play">
+                        <img src="https://image-qiniu.jellow.site/FjOHiuw-tN13tG0rCbLG9sWO7q7T.png" alt="Android下载DuoDo" style="height: 50px;">
+                    </a>
+
+                </div>
+            </nav>
+            <p>📮Email: DuoDoinc@gmail.com</p>
+        </div>
+    </header>
+
+    <!-- 主体内容 -->
+    <main>
+        <!-- 功能部分 -->
+        <section class="feature-section" aria-label="Key Features">
+            <div class="container">
+                <!-- 功能1 -->
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <h2 data-lang='{"en":"Collaborative Task Management","zh":"多人协作任务管理"}'>Collaborative Task Management</h2>
+                        <p data-lang='{"en":"Create and share tasks with friends, track progress together, and motivate each other through real-time interactions. Simple interface with powerful social features to keep everyone engaged and productive.","zh":"创建并与好友分享任务，一起追踪进度，通过实时互动互相激励。简单的界面配合强大的社交功能，让每个人都保持参与度和效率。"}'>Create and share tasks with friends...</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://image-qiniu.jellow.site/FgfquAeekJxGA3dxolSnFbQ7Gc1X.jpg" alt="DuoDo's intuitive task management interface">
+                    </div>
+                </div>
+
+                <!-- 功能2 -->
+                <div class="feature-grid">
+                    <div class="feature-image">
+                        <img src="https://image-qiniu.jellow.site/FnIHsBv32r_lKgEJ3Q_L83YgPpwb.jpg" alt="DuoDo's task creation interface">
+                    </div>
+                    <div class="feature-content">
+                        <h2 data-lang='{"en":"Smart Task Creation","zh":"智能任务创建"}'>Smart Task Creation</h2>
+                        <p data-lang='{"en":"Intuitive task creation interface with flexible scheduling, visual cues, and smart reminders. Create routines that work for different scenarios - from study sessions to social hangouts.","zh":"直观的任务创建界面，灵活的日程安排，视觉提示和智能提醒。创建适用于不同场景的日常计划 - 从学习会议到社交聚会。"}'>Intuitive task creation interface...</p>
+                    </div>
+                </div>
+
+                <!-- 功能3 -->
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <h2 data-lang='{"en":"Social Progress Tracking","zh":"社交进度追踪"}'>Social Progress Tracking</h2>
+                        <p data-lang='{"en":"Build stronger connections through collaborative task management. Share achievements, celebrate milestones, and grow together in a supportive environment.","zh":"通过协作任务管理建立更紧密的联系。分享成就，庆祝里程碑，在互助环境中共同成长。"}'>Build stronger connections...</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://image-qiniu.jellow.site/FpClq9mXmcUKhdMQ56TUHUb3gKvq.jpg" alt="DuoDo's collaboration features">
+                    </div>
+                </div>
+                
+                <!-- 功能4 -->
+                <div class="feature-grid">
+                    <div class="feature-image">
+                        <img src="https://image-qiniu.jellow.site/FumMeK0ZeT2DB5lIOBM27lARXG4B.jpg" alt="DuoDo's progress features">
+                    </div>
+                    <div class="feature-content">
+                        <h2 data-lang='{"en":"Track your progress","zh":"追踪你的进步"}'>Track your progress</h2>
+                        <p data-lang='{"en":"Turning daily tasks into consistent victories, your journey, your victories.","zh":"将日常任务转化为持续的胜利，这是你的旅程，你的成就。"}'>Turning daily tasks into consistent victories...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 特性卡片部分 -->
+        <section class="container">
+            <div class="app-features">
+                <article class="feature-card">
+                    <h3 data-lang='{"en":"Smart Social Features","zh":"智能社交功能"}'>Smart Social Features</h3>
+                    <p data-lang='{"en":"Interactive nudging system and real-time progress tracking to keep everyone motivated.","zh":"互动提醒系统和实时进度追踪，让每个人都保持动力。"}'>Interactive nudging system...</p>
+                </article>
+                <article class="feature-card">
+                    <h3 data-lang='{"en":"Multi-scene Collaboration","zh":"多场景协作"}'>Multi-scene Collaboration</h3>
+                    <p data-lang='{"en":"Perfect for study groups, social hangouts, couple activities, and more.","zh":"完美适用于学习小组、社交聚会、情侣活动等多种场景。"}'>Perfect for study groups...</p>
+                </article>
+                <article class="feature-card">
+                    <h3 data-lang='{"en":"Privacy First","zh":"隐私优先"}'>Privacy First</h3>
+                    <p data-lang='{"en":"Enterprise-grade security protecting your personal information and task data.","zh":"企业级安全保护，守护您的个人信息和任务数据。"}'>Enterprise-grade security...</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- 最终CTA部分 -->
+        <section class="hero" style="background: linear-gradient(135deg, #F0F7FF 0%, #F6F0FF 100%);">
+            <div class="container">
+                <h2 data-lang='{"en":"Transform Your Daily Life with DuoDo","zh":"用DuoDo改变你的日常生活"}'>Transform Your Daily Life with DuoDo</h2>
+                <p data-lang='{"en":"Join thousands of users making task management more engaging and social with DuoDo.","zh":"加入数千名用户的行列，让任务管理更有趣、更社交化。"}'>Join thousands of users...</p>
+                <div class="download-buttons">
+                    <!-- English version buttons -->
+                <div class="en-buttons" style="display: none;">
+                                        <a href="https://apps.apple.com/app/id6738073645" class="store-button" target="_blank" rel="noopener" aria-label="Get DuoDo on App Store">
+                        <img src="https://image-qiniu.jellow.site/FgKNwrnHyr1mpzMRCFrL1R32QJ27.png" alt="Download DuoDo on App Store" style="height: 50px;">
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.ppzzzzzzzzzzzz.duodo" class="store-button" target="_blank" rel="noopener" aria-label="Get DuoDo on Google Play">
+                        <img src="https://image-qiniu.jellow.site/Ftby8EEf82enUD8lwYodDbldLIo6.png" alt="Get DuoDo on Google Play" style="height: 50px;">
+                    </a>
+                </div>
+                <!-- Chinese version buttons -->
+                <div class="zh-buttons" style="display: none;">
+                 
+                                        <a href="https://apps.apple.com/cn/app/duodo-%E5%A4%9A%E4%BA%BA%E4%BB%BB%E5%8A%A1%E4%B8%8E%E6%B8%85%E5%8D%95%E7%AE%A1%E7%90%86/id6738073645" class="store-button" target="_blank" rel="noopener" aria-label="Get DuoDo on App Store">
+                        <img src="https://image-qiniu.jellow.site/Fhhfef3tiUJc4g6CThpHCzf3jRWk.png" alt="App Store下载DuoDo" style="height: 50px;">
+                    </a>
+                    <a href="https://other-qiniu.jellow.site/lrX2bB41lL6odaQhU7pW4maM9wtg.apk" class="store-button" target="_blank" rel="noopener" aria-label="Get DuoDo on Google Play">
+                        <img src="https://image-qiniu.jellow.site/FjOHiuw-tN13tG0rCbLG9sWO7q7T.png" alt="Android下载DuoDo" style="height: 50px;">
+                    </a>
+
+                </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部部分 -->
+    <footer class="footer">
+        <div class="container">
+            <p data-lang='{"en":"Copyright 2024 DuoDo Inc. Connect with DuoDoinc@gmail.com","zh":"版权所有 2024 DuoDo Inc. 联系我们：DuoDoinc@gmail.com"}'>Copyright 2024 DuoDo Inc...</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -27,7 +27,9 @@ date: 2024-11-21
 
 ## 一、应用介绍
 DuoDo是一款多人任务管理应用，通过好友协作，让日常活动变得更有趣和有动力。无论是学习、聚会还是活动策划，DuoDo都能将日常任务转化为好玩的体验。
-
+    - [App Store下载DuoDo](https://play.google.com/store/apps/details?id=com.ppzzzzzzzzzzzz.duodo)
+    - [安卓用户下载DuoDo](https://getduodo.com)
+ 
 ### 核心功能
 1. 多人任务管理
 * 创建并分享任务给好友

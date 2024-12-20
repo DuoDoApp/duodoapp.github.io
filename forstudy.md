@@ -27,7 +27,7 @@ date: 2024-11-21
 
 ## I. App Introduction
 DuoDo is a multi-person task management app that makes daily activities more engaging through friend collaboration. Whether it's studying, hanging out, or planning events, DuoDo turns routine tasks into social experiences.
-    - [DuoDo on App Store](https://play.google.com/store/apps/details?id=com.ppzzzzzzzzzzzz.duodo)
+    - [DuoDo on App Store](https://apps.apple.com/app/id6738073645)
     - [DuoDo on Google Play](https://play.google.com/store/apps/details?id=com.ppzzzzzzzzzzzz.duodo)
  
 ### Key Features

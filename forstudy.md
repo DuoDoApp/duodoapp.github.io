@@ -57,7 +57,7 @@ DuoDo is a multi-person task management app that makes daily activities more eng
 ### App Screenshots
 
 #### Task List, Create New Task, Create New Task, Personal Achievements
-![Task List Homepage](https://image-qiniu.jellow.site/FtziX_GUCzJAagBu1-9Y_heSK4w1.png)
+![Task List Homepage](https://image-qiniu.jellow.site/FhNURzo3_82tXUWzXMeoIEZmRPet.jpeg)
 
 ## II. Usage Scenarios
 

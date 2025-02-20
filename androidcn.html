@@ -3,24 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DuoDo - 社交任务管理应用 | 一起协作与成就</title>
+    <title>DuoDo - 多人任务清单管理App | 一起协作与成就</title>
     <meta name="description" content="DuoDo - 通过好友互动让日常活动更有趣的协作任务管理应用。一起规划、执行并实现目标。">
-    <meta name="keywords" content="𝒅𝒖𝒐𝒅𝒐.𝒐𝒌𝒌𝒍𝒂.𝒄𝒏, 𝒈𝒆𝒕𝑫𝒖𝒐𝑫𝒐.𝒄𝒐𝒎, ADHD任务管理, 家庭协作应用, 任务规划, 日常管理, ADHD支持, 习惯分享">
-    <meta name="author" content="DuoDo Inc.">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="DuoDo - 让任务管理更社交">
-    <meta property="og:description" content="一个通过日常任务与朋友连接的应用。一起规划、执行并实现目标。">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://other-qiniu.jellow.site/FhAh38uEbDWbIq7UQ-rLWoIdQCXT.png">
-
-    <!-- Favicon Links -->
-    <link rel="icon" href="https://other-qiniu.jellow.site/Fma2mZPtNYiCJOsmsFJ05Dsn0OEk.ico">
-    <link rel="canonical" href="https://getduodo.com" />
-    
-    <!-- Analytics -->
-    <script defer data-domain="getduodo.com" src="https://plausible.midway.run/js/script.js"></script>
-
     <style>
         * {
             margin: 0;
@@ -31,268 +15,149 @@
 
         body {
             background: #FFFFFF;
-            color: #2D3748;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 20px;
         }
 
-        .hero {
-            text-align: center;
-            padding: 2rem 0;
-            background: linear-gradient(135deg, #F6F0FF 0%, #F0F7FF 100%);
-            min-height: 50vh;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: #4A5568;
-            margin-bottom: 2rem;
-        }
-
-        .download-buttons {
+        .app-header {
             display: flex;
+            align-items: center;
             gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .app-info h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .app-info p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .store-button {
-            display: inline-block;
-            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-radius: 12px;
+            background: #fff;
+            border: 1px solid #eee;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s ease;
         }
 
         .store-button:hover {
-            transform: scale(1.05);
+            background: #f5f5f5;
+            transform: translateY(-1px);
         }
 
-        .store-button img {
-            height: 50px;
-            width: auto;
+        .store-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 12px;
         }
 
-        /* Feature Sections */
-        .feature-section {
-            padding: 2rem 0;
+        .store-text {
+            font-size: 16px;
+            color: #333;
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin: 2rem 0;
+        .download-text {
+            margin-left: auto;
+            color: #666;
         }
 
-        .feature-content {
-            padding: 2rem;
-        }
-
-        .feature-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: #2D3748;
-        }
-
-        .feature-content p {
-            font-size: 1.125rem;
-            color: #4A5568;
-            line-height: 1.8;
-        }
-
-        .feature-image {
-            position: relative;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            width: 300px;
-            margin: 0 auto;
-        }
-
-        .feature-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        .app-features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .feature-card {
-            background: #F7FAFC;
-            padding: 2rem;
-            border-radius: 1rem;
+        .ios-link {
             text-align: center;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: #718096;
-            font-size: 0.875rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .app-features {
-                grid-template-columns: 1fr;
-            }
-
-            .feature-image {
-                width: 250px;
-            }
-
-            .feature-content {
-                text-align: center;
-            }
-
-            .download-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .store-button img {
-                height: 45px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
         }
 
         @media (max-width: 480px) {
-            .hero {
-                padding: 4rem 0;
-                min-height: 60vh;
+            body {
+                padding: 16px;
             }
 
-            .feature-image {
-                width: 100%;
+            .app-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .app-info h1 {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <header class="hero">
-        <div class="container">
-            <h1>DuoDo安卓下载</h1>
-            <p>📢华为和oppo用户可直接在应用商店下载，其他安卓用户请下载apk安装（陆续上架中）</p>
-            <div class="download-buttons">
-                <a href="https://m.malink.cn/s/Rbuiiu" class="store-button" target="_blank" rel="noopener">
-                    <img src="https://image-qiniu.jellow.site/FqPCKlUOjP2jOJKvJhtdC9Ns9Ckq.png" alt="华为和oppo下载DuoDo">
-                </a>
-                <a href="https://other-qiniu.jellow.site/ltpmhV5x3PkDSuBgMEcyAX16QxdC.apk" class="store-button" target="_blank" rel="noopener">
-                    <img src="https://image-qiniu.jellow.site/FjmhqkBTUrmgW11agQmANSh2AB4r.png" alt="其他安卓下载DuoDo">
-                </a>
-            </div>
-            <p>📮Email: DuoDoinc@gmail.com</p>
+    <div class="app-header">
+        <img src="https://other-qiniu.jellow.site/Fma2mZPtNYiCJOsmsFJ05Dsn0OEk.ico" alt="DuoDo" class="app-icon">
+        <div class="app-info">
+            <h1>下载 DuoDo App</h1>
+            <p>多人任务清单管理</p>
         </div>
-    </header>
+    </div>
 
-    <main>
-        <section class="feature-section">
-            <div class="container">
-                <div class="feature-grid">
-                    <div class="feature-content">
-                        <h2>多人协作任务管理</h2>
-                        <p>创建并与好友分享任务，一起追踪进度，通过实时互动互相激励。简单的界面配合强大的社交功能，让每个人都保持参与度和效率。</p>
-                    </div>
-                    <div class="feature-image">
-                        <img src="https://image-qiniu.jellow.site/FgfquAeekJxGA3dxolSnFbQ7Gc1X.jpg" alt="DuoDo的任务管理界面">
-                    </div>
-                </div>
+    <div class="download-options">
+        <a href="https://m.malink.cn/s/Rbuiiu" class="store-button">
+            <img src="https://download.deepseek.com/app/huawei.07959815b5.png" alt="华为" class="store-icon">
+            <span class="store-text">从华为应用商店</span>
+            <span class="download-text">下载</span>
+        </a>
 
-                <div class="feature-grid">
-                    <div class="feature-image">
-                        <img src="https://image-qiniu.jellow.site/FnIHsBv32r_lKgEJ3Q_L83YgPpwb.jpg" alt="DuoDo的任务创建界面">
-                    </div>
-                    <div class="feature-content">
-                        <h2>智能任务创建</h2>
-                        <p>直观的任务创建界面，灵活的日程安排，视觉提示和智能提醒。创建适用于不同场景的日常计划 - 从学习会议到社交聚会。</p>
-                    </div>
-                </div>
+        <a href="https://m.malink.cn/s/Rbuiiu" class="store-button">
+            <img src="https://download.deepseek.com/app/xiaomi.ea77799efb.png" alt="小米" class="store-icon">
+            <span class="store-text">从小米应用商店</span>
+            <span class="download-text">下载</span>
+        </a>
 
-                <div class="feature-grid">
-                    <div class="feature-content">
-                        <h2>社交进度追踪</h2>
-                        <p>通过协作任务管理建立更紧密的联系。分享成就，庆祝里程碑，在互助环境中共同成长。</p>
-                    </div>
-                    <div class="feature-image">
-                        <img src="https://image-qiniu.jellow.site/FpClq9mXmcUKhdMQ56TUHUb3gKvq.jpg" alt="DuoDo的协作功能">
-                    </div>
-                </div>
-                
-                <div class="feature-grid">
-                    <div class="feature-image">
-                        <img src="https://image-qiniu.jellow.site/FumMeK0ZeT2DB5lIOBM27lARXG4B.jpg" alt="DuoDo的进度功能">
-                    </div>
-                    <div class="feature-content">
-                        <h2>追踪你的进步</h2>
-                        <p>将日常任务转化为持续的胜利，这是你的旅程，你的成就。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <a href="https://m.malink.cn/s/Rbuiiu" class="store-button">
+            <img src="https://download.deepseek.com/app/vivo.237bb93a6b.png" alt="vivo" class="store-icon">
+            <span class="store-text">从vivo应用商店</span>
+            <span class="download-text">下载</span>
+        </a>
 
-        <section class="container">
-            <div class="app-features">
-                <article class="feature-card">
-                    <h3>智能社交功能</h3>
-                    <p>互动提醒系统和实时进度追踪，让每个人都保持动力。</p>
-                </article>
-                <article class="feature-card">
-                    <h3>多场景协作</h3>
-                    <p>完美适用于学习小组、社交聚会、情侣活动等多种场景。</p>
-                </article>
-                <article class="feature-card">
-                    <h3>隐私优先</h3>
-                    <p>企业级安全保护，守护您的个人信息和任务数据。</p>
-                </article>
-            </div>
-        </section>
+        <a href="https://m.malink.cn/s/Rbuiiu" class="store-button">
+            <img src="https://download.deepseek.com/app/oppo.0894780d23.png" alt="OPPO" class="store-icon">
+            <span class="store-text">从OPPO软件商店</span>
+            <span class="download-text">下载</span>
+        </a>
 
-        <section class="hero" style="background: linear-gradient(135deg, #F0F7FF 0%, #F6F0FF 100%);">
-            <div class="container">
-                <h2>用DuoDo改变你的日常生活</h2>
-                <p>加入数千名用户的行列，让任务管理更有趣、更社交化。</p>
-                <div class="download-buttons">
-                    <a href="https://m.malink.cn/s/Rbuiiu" class="store-button" target="_blank" rel="noopener">
-                        <img src="https://image-qiniu.jellow.site/FqPCKlUOjP2jOJKvJhtdC9Ns9Ckq.png" alt="华为和oppo下载DuoDo">
-                    </a>
-                    <a href="https://other-qiniu.jellow.site/ltpmhV5x3PkDSuBgMEcyAX16QxdC.apk" class="store-button" target="_blank" rel="noopener">
-                        <img src="https://image-qiniu.jellow.site/FjmhqkBTUrmgW11agQmANSh2AB4r.png" alt="其他安卓下载DuoDo">
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+        <a href="https://other-qiniu.jellow.site/ltpmhV5x3PkDSuBgMEcyAX16QxdC.apk" class="store-button">
+            <img src="https://download.deepseek.com/app/android.c74dc5d623.png" alt="Android" class="store-icon">
+            <span class="store-text">下载 APK 文件</span>
+            <span class="download-text">下载</span>
+        </a>
 
-    <footer class="footer">
-        <div class="container">
-            <p>版权所有 2024 DuoDo Inc. 联系我们：DuoDoinc@gmail.com</p>
-        </div>
+        <a href="https://apps.apple.com/cn/app/duodo-%E5%A4%9A%E4%BA%BA%E4%BB%BB%E5%8A%A1%E4%B8%8E%E6%B8%85%E5%8D%95%E7%AE%A1%E7%90%86/id6738073645" class="store-button">
+            <img src="https://download.deepseek.com/app/apple.5b4267ccd0.png" alt="OPPO" class="store-icon">
+            <span class="store-text">从苹果软件商店</span>
+            <span class="download-text">下载</span>
+        </a>
+
+    </div>
+
+ 
+    <footer style="text-align: center; margin-top: 40px; color: #666; font-size: 14px;">
+        <p>版权所有 2024 DuoDo Inc.</p>
+        <p>联系我们：DuoDoinc@gmail.com</p>
     </footer>
 </body>
 </html>
